@@ -26,6 +26,19 @@ export const signIn = async(req,res,next)=>{
     }
 }
 
+export const verifyEmail = async (req, res, next) => {
+    const { token } = req.params;
+    jwt.verify(token, process.env.EMAIL_TOKEN_SECRET, async (err, payload) => {
+        if (err) return res.status(400).json({ message: "Invalid or expired token" });
+        await User.findOneAndUpdate(
+            { email: payload.email },
+            { confirmEmail: true }
+        );
+        return res.status(200).json({ message: "Email verified successfully", email: payload.email });
+    });
+}
+
+
 export const verifyOTP = async(req,res,next)=>{
     const {email , otp} = req.body
     const user = await User.findOne({email})

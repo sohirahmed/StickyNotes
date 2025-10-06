@@ -17,13 +17,6 @@ app.use(express.json())
 app.use('/auth', userRouter)
 app.use('/notes', noteRouter)
 
-app.get('/verify/:token',async(req,res,next)=>{
-    jwt.verify(req.params.token , process.env.EMAIL_TOKEN_SECRET ,async (err , payload)=>{
-        if(err) return res.json(err)
-            await User.findOneAndUpdate({email:payload.email},{confirmEmail:true})
-    res.json({message:"success" ,email:payload.email})
-    })
-})
 
 
 app.get('/',(req,res,next)=>{
