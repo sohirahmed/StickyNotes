@@ -1,29 +1,25 @@
 import { Note } from "../../../database/models/note.model.js"
+import { catchError } from "../../middleware/catchError.js"
 
 
-// export const getAllNotes = async(req,res,next)=>{
-//     let note = await Note.find().populate('createdBy')
-//     res.status(201).json({message:"success", note})
-// }
-
-export const getNotes = async(req,res,next)=>{
+export const getNotes = catchError(async(req,res,next)=>{
     let note = await Note.find({createdBy:req.user.userId}).populate('createdBy')
     res.status(201).json({message:"success", note})
-}
+})
 
 
-export const addNote = async(req,res,next)=>{
+export const addNote = catchError(async(req,res,next)=>{
     let note = await Note.insertMany(req.body)
     res.status(201).json({message:"Note created successfully", note})
-}
+})
 
-export const updateNote = async(req,res,next)=>{
+export const updateNote = catchError(async(req,res,next)=>{
     let note = await Note.findByIdAndUpdate(req.params.id, req.body,{new:true})
     res.status(201).json({message:"Note updated successfully"})
-}
+})
 
-export const deleteNote = async(req,res,next)=>{
+export const deleteNote = catchError(async(req,res,next)=>{
     let note = await Note.findByIdAndDelete(req.params.id)
-    if(!note) return res.status(404).json({message:"Note not found"})
+    if(!note) return next (new AppError("Note not found", 404))
     res.status(201).json({message:"Note deleted successfully"})
-}
+})

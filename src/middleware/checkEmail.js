@@ -4,7 +4,7 @@ import bcrypt from "bcrypt"
 export const checkEmail = async(req,res,next)=>{
     let userExists = await User.findOne({email:req.body.email})
     if(userExists){
-        return res.status(409).json({message:"User already exists"})
+        return next(new AppError("User already exists", 409))
     }
     let hash = bcrypt.hashSync(req.body.password , 8)
     req.body.password = hash

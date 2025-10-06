@@ -6,7 +6,6 @@ const noteRouter = Router()
 
 noteRouter.use(verifyToken)
 
-// noteRouter.get('/', getAllNotes)
 noteRouter.get('/', getNotes)
 noteRouter.post('/add', addNote)
 noteRouter.put('/update/:id' , updateNote)

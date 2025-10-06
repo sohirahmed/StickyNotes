@@ -4,7 +4,7 @@ export const verifyToken = async(req,res,next)=>{
     let [key , token] = req.headers.token.split(' ')
     if(key=="bearer"){
             jwt.verify(token, process.env.JWT_SECRET ,async(err,decoded)=>{
-        if(err) return res.status(401).json({message:"invalid token" , err})
+        if(err) return next (new AppError("Invalid token", 401))
             req.user = decoded
         next()
     })
