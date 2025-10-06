@@ -15,7 +15,7 @@ export const addNote = catchError(async(req,res,next)=>{
 
 export const updateNote = catchError(async(req,res,next)=>{
     let note = await Note.findByIdAndUpdate(req.params.id, req.body,{new:true})
-    res.status(201).json({message:"Note updated successfully"})
+    res.status(201).json({message:"Note updated successfully" , note})
 })
 
 export const deleteNote = catchError(async(req,res,next)=>{
