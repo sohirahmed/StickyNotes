@@ -29,7 +29,5 @@ export const sendOTP = async(email)=>{
     });
     console.log("OTP sent successfully to:", email);
     
-
-
 }
 
