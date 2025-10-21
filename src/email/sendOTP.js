@@ -17,7 +17,7 @@ export const sendOTP = async(email)=>{
     });
 
         await transporter.verify();
-    console.log("✅ Gmail transporter verified successfully!");
+    console.log(" Gmail transporter verified successfully!");
 
     await User.findOneAndUpdate({email} , {otpCode:otp , otpExpire: Date.now() + 5 * 60 *1000 })
     await transporter.sendMail({
