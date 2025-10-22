@@ -34,3 +34,8 @@ A backend API built with **Node.js**, **Express**, and **MongoDB**, allowing use
 4. Each user can **only access their own notes**.  
 
 ---
+## 🧪 API Documentation
+
+You can test all endpoints using the Postman collection below:
+
+👉 [View on Postman](https://documenter.getpostman.com/view/34513809/2sB3QJNAHN)
